@@ -1,14 +1,7 @@
 <?php
-include_once('class.php');
 
-const br = '<br>';
-$name =   $lname = $pas = $email ='';
-if(isset($_POST['btn'])){
-    $name = $_POST['name'];
-    $lname = $_POST['lname'];
-    $email= $_POST['email'];
-    $pas = $_POST['pas'];
-}
+
+
 
 $loginempty = $empname = $emplname = $empemail = $emppas = '';
 if(isset($_GET['emptylogin'])){
@@ -39,7 +32,15 @@ elseif(isset($_GET['errlname'])){
 elseif(isset($_GET['erremail'])){
     $empemail= "Emai  неправилний";
 }
-
+elseif(isset($_GET['errpas'])){
+    $emppas = "Пароль хато мебошад";
+}
+elseif(isset($_GET['emailExist'])){
+    $empemail= "Шумо обуна наметавонед бо ин E-mail ";
+}
+elseif(isset($_GET['passwordExist'])){
+    $emppas= "Пароль интихоб шудааст ";
+}
 
 
 
@@ -57,19 +58,21 @@ elseif(isset($_GET['erremail'])){
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Регистрация</title>
 </head>
 <body>
     <div class='back'>
         <div class='login-box'>
-    <h1>LOGIN</h1>
+    <h1>Регистрация</h1>
     <div class='logcheck'> <?php echo $loginempty; ?>  </div>
 <form action="check_form.php" method="post">
-<div class='textbox'>Name:              <input type="text" name='name' placeholder="Enter name" value="<?php echo $name;?>"></div><span><?php echo $empname; ?> </span>
-<div class='textbox'>Last name:         <input type="text" name='lname' placeholder='Enter lname'></div><span><?php echo $emplname; ?> </span>
+<div class='textbox'>Ном:              <input type="text" name='name' placeholder="Enter name" value="<?php   ?>"></div><span><?php echo $empname; ?> </span>
+<div class='textbox'>Фамиля:         <input type="text" name='lname' placeholder='Enter lname'></div><span><?php echo $emplname; ?> </span>
 <div class='textbox'>Email:          <input type="email" name='email' placeholder="Enter email"></div><span><?php echo $empemail; ?> </span>
-<div class='textbox'>Password:<input type="password" name='pas' placeholder="Reapet password"></div><span><?php echo $emppas; ?> </span>
+<div class='textbox'>Проль:<input type="password" name='pas' placeholder="Enter password"></div><span><?php echo $emppas; ?> </span>
+<?php if(!isset($_GET['test'])) { ?>
 <input type="submit" name="btn" class='btn' value='LOGIN'>
+<?php } ?>
 </form>
 </div>
 </div>
@@ -77,16 +80,16 @@ elseif(isset($_GET['erremail'])){
 </html>
 
 
-
 <style>
 
 body{
-    margin: 0;
-    padding: 0;
-    font-family: sans-serif;
-    background: url('https://www.elsetge.cat/myimg/f/37-370605_ten-advantages-of-wallpaper-soothing-for-eyes-and.jpg');
+  
+    background: linear-gradient(to right, #000, #000);
+    /* background: url('https://www.elsetge.cat/myimg/f/37-370605_ten-advantages-of-wallpaper-soothing-for-eyes-and.jpg');
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: cover; */
+
+    font-family: sans-serif;
 }
 
 
@@ -132,6 +135,7 @@ input[type="search"] {
 }
 
 .textbox input{
+outline: none;
 border: 0 solid;
 background: none;
 width:100%;
@@ -142,7 +146,6 @@ color:  rgb(255, 255, 255);;
 font-weight: bold;
 }
 input:hover{
-    background: black;
     color: white;
 }
 .btn{
